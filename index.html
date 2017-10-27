@@ -1,0 +1,25 @@
+<html ng-app="chatApp">
+    <head>
+        <script src="angular.min.js"></script>
+        <script src="app.js"></script>
+        <link rel="stylesheet" href="bootstrap.css">
+    </head>
+    <body>
+
+        <div ng-controller="todoCtrl as todo">
+            <input type="text" class="form-control" ng-model="todo.task" ng-keypress="$event.charCode==13 && todo.addTask(todo.task)">
+            <button class="btn btn-success btn-lg btn-block" ng-class="{'btn-success':!todo.enableEdit,'btn-warning':todo.enableEdit}" ng-click="todo.addTask(todo.task)">{{todo.mainBtnText}}</button>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-danger" ng-class="{'list-group-item-danger':!item.status, 'list-group-item-success':item.status}" ng-repeat="item in todo.tasks">{{item.text}}
+                    <button class="btn btn-danger" ng-click="todo.removeTask($index)">X</button>
+                    <button class="btn btn-success" ng-class="{'btn-success':!item.status,'btn-warning':item.status}" ng-click="todo.taskCompleted($index)">{{item.btntext}}</button>
+                    <span>{{item.time | date:"dd/MMM hh:mm:ss"}}</span>
+                    <button class="btn btn-info" ng-click="todo.editTask($index)">Edit</button>
+                    <button class="btn" ng-click="todo.moveUp($index)">Move up</button>
+                    <button class="btn" ng-click="todo.moveDown($index)">Move down</button>
+                </li>
+            </ul>
+        </div>
+        
+    </body>
+</html>
